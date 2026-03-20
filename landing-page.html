@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מהגוף למוח – מוכנים לכיתה א׳</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A6FA5;
+            --primary-dark: #3A5A8A;
+            --accent: #F4A261;
+            --accent-dark: #E08B3E;
+            --warm: #E76F51;
+            --soft-green: #6BAA75;
+            --soft-purple: #8E7CC3;
+            --bg-cream: #FFF9F0;
+            --bg-light: #F0F4FA;
+            --text-dark: #2D3748;
+            --text-muted: #5A6577;
+            --white: #FFFFFF;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+            --radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-cream);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #4A6FA5 0%, #6B8EC4 40%, #8EAFD8 70%, #B8D4EE 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(244,162,97,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -15%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(107,170,117,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .hero-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.12;
+            animation: drift 12s ease-in-out infinite;
+        }
+
+        .shape-1 { width: 80px; height: 80px; background: var(--accent); top: 15%; right: 10%; animation-delay: 0s; }
+        .shape-2 { width: 50px; height: 50px; background: var(--white); top: 30%; left: 8%; animation-delay: 2s; }
+        .shape-3 { width: 120px; height: 120px; background: var(--soft-green); bottom: 20%; right: 20%; animation-delay: 4s; }
+        .shape-4 { width: 35px; height: 35px; background: var(--warm); top: 60%; left: 15%; animation-delay: 1s; }
+        .shape-5 { width: 65px; height: 65px; background: var(--soft-purple); bottom: 30%; left: 25%; animation-delay: 3s; }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(15px, -20px) rotate(5deg); }
+            50% { transform: translate(-10px, 15px) rotate(-3deg); }
+            75% { transform: translate(20px, 10px) rotate(7deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 850px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            padding: 0.5rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 500;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: rgba(255,255,255,0.9);
+            max-width: 650px;
+            margin: 1.5rem auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: var(--accent);
+            color: var(--white);
+            padding: 1.1rem 3rem;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(244,162,97,0.4);
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(244,162,97,0.5);
+        }
+
+        .hero-cta svg { width: 24px; height: 24px; }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .hero-scroll svg {
+            width: 32px;
+            height: 32px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===== SECTIONS GENERAL ===== */
+        section {
+            padding: 6rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(74,111,165,0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            line-height: 1.9;
+        }
+
+        /* ===== PAIN / EMOTION SECTION ===== */
+        .pain-section {
+            background: var(--white);
+            position: relative;
+        }
+
+        .pain-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--warm), var(--soft-purple), var(--primary));
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .pain-text p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-muted);
+        }
+
+        .pain-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .pain-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--bg-cream);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-right: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pain-card:hover {
+            transform: translateX(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .pain-card:nth-child(2) { border-right-color: var(--warm); }
+        .pain-card:nth-child(3) { border-right-color: var(--soft-purple); }
+
+        .pain-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .pain-card:nth-child(1) .pain-icon { background: rgba(244,162,97,0.15); }
+        .pain-card:nth-child(2) .pain-icon { background: rgba(231,111,81,0.15); }
+        .pain-card:nth-child(3) .pain-icon { background: rgba(142,124,195,0.15); }
+
+        .pain-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .pain-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== MYTH SECTION ===== */
+        .myth-section {
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .myth-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .myth-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .myth-box.wrong::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--warm);
+        }
+
+        .myth-box.right::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--soft-green);
+        }
+
+        .myth-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.2rem;
+        }
+
+        .myth-box.wrong .myth-tag {
+            background: rgba(231,111,81,0.12);
+            color: var(--warm);
+        }
+
+        .myth-box.right .myth-tag {
+            background: rgba(107,170,117,0.12);
+            color: var(--soft-green);
+        }
+
+        .myth-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .myth-box p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .myth-box .highlight-text {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* ===== METHOD SECTION ===== */
+        .method-section {
+            background: var(--white);
+        }
+
+        .method-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .method-intro .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .method-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .method-card {
+            background: linear-gradient(145deg, var(--bg-cream) 0%, var(--white) 100%);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 4px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            transition: height 0.3s ease;
+        }
+
+        .method-card:nth-child(1)::after { background: var(--primary); }
+        .method-card:nth-child(2)::after { background: var(--soft-green); }
+        .method-card:nth-child(3)::after { background: var(--soft-purple); }
+
+        .method-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .method-card:hover::after {
+            height: 6px;
+        }
+
+        .method-icon-wrap {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .method-card:nth-child(1) .method-icon-wrap { background: rgba(74,111,165,0.1); }
+        .method-card:nth-child(2) .method-icon-wrap { background: rgba(107,170,117,0.1); }
+        .method-card:nth-child(3) .method-icon-wrap { background: rgba(142,124,195,0.1); }
+
+        .method-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .method-card p {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* ===== WORKSHOP DETAILS STRIP ===== */
+        .details-strip {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 3.5rem 1.5rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .detail-item {
+            color: var(--white);
+        }
+
+        .detail-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--white) 30%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-label {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        /* ===== RESULTS SECTION ===== */
+        .results-section {
+            background: var(--bg-cream);
+        }
+
+        .results-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .result-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .result-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .result-check {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--soft-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+        }
+
+        .result-check svg {
+            width: 16px;
+            height: 16px;
+            color: var(--white);
+        }
+
+        .bonus-card {
+            background: linear-gradient(145deg, #FFF5EB 0%, #FFF0E0 100%);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            border: 2px solid rgba(244,162,97,0.3);
+            position: relative;
+        }
+
+        .bonus-badge {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .bonus-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--accent-dark);
+        }
+
+        .bonus-card p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(160deg, #4A6FA5 0%, #3A5A8A 50%, #2D4A73 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 1.5rem;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(244,162,97,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: var(--accent);
+            color: var(--white);
+            padding: 1.2rem 3.5rem;
+            border-radius: 60px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(244,162,97,0.4);
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(244,162,97,0.5);
+        }
+
+        .cta-trust {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1a2332;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .pain-grid,
+            .myth-wrapper,
+            .results-content {
+                grid-template-columns: 1fr;
+            }
+
+            .method-cards {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 2.5rem auto 0;
+            }
+
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 4rem 1.2rem; }
+
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-cta, .cta-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-badge">סדנה ייחודית לגילאי 5-6 &bull; 12 מפגשים</div>
+        <h1>
+            מהגוף למוח
+            <span>מוכנים לכיתה א׳</span>
+        </h1>
+        <p class="hero-subtitle">
+            הסדנה שמכינה את הילד שלכם לבית הספר מהמקום הנכון — לא מהראש, אלא מהגוף. כי ילד עם גוף חזק ומווסת הוא ילד שמגיע לכיתה עם ביטחון, ריכוז ותחושת מסוגלות.
+        </p>
+        <a href="https://wa.me/97254646479363?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%9E%D7%94%D7%92%D7%95%D7%A3%20%D7%9C%D7%9E%D7%95%D7%97" target="_blank" class="hero-cta">
+            שמרו לי מקום
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+    </div>
+
+    <div class="hero-scroll">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+</section>
+
+<!-- ==================== HERO IMAGE ==================== -->
+<section style="background:var(--white);padding:0;text-align:center;overflow:hidden;">
+    <img src="Gemini_Generated_Image_pbltu4pbltu4pblt.png" alt="מוכנים לכיתה א׳ בחיוך!" style="width:100%;max-width:1100px;margin:0 auto;display:block;border-radius:0;">
+</section>
+
+<!-- ==================== PAIN / EMOTION ==================== -->
+<section class="pain-section">
+    <div class="container">
+        <div class="fade-up">
+            <span class="section-label">אנחנו מבינים אתכם</span>
+            <h2 class="section-title">הפרפרים בבטן? לגמרי מובנים.</h2>
+        </div>
+
+        <div class="pain-grid">
+            <div class="pain-text fade-up">
+                <p>
+                    המעבר לכיתה א׳ מלווה בהרבה התרגשות, ולפעמים גם בחששות אמיתיים. רובנו שואלים את עצמנו שאלות דומות, ולא תמיד מוצאים מענה. הידיעה שהילד שלכם עומד לעשות את הקפיצה הגדולה מעוררת רגשות מעורבים — וזה בסדר גמור. אתם לא לבד.
+                </p>
+            </div>
+
+            <div class="pain-cards fade-up">
+                <div class="pain-card">
+                    <div class="pain-icon">🪑</div>
+                    <div>
+                        <h4>איך ישב בשקט כל כך הרבה זמן?</h4>
+                        <p>מ-45 דקות בגן ליום לימודים שלם — זה קפיצה גדולה לגוף הקטן</p>
+                    </div>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">🫨</div>
+                    <div>
+                        <h4>איך יתמודד עם כל ההמולה?</h4>
+                        <p>כיתה של 30+ תלמידים, רעש, סחות דעת — המון גירויים בבת אחת</p>
+                    </div>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">💙</div>
+                    <div>
+                        <h4>מה אם ירגיש חוסר ביטחון?</h4>
+                        <p>סביבה חדשה, מורים חדשים, חברים חדשים — וכל זה ביום אחד</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== MYTH BREAKING ==================== -->
+<section class="myth-section">
+    <div class="container">
+        <div class="fade-up" style="text-align: center; margin-bottom: 1rem;">
+            <span class="section-label">הגיע הזמן לשבור מיתוס</span>
+            <h2 class="section-title">הכנה לכיתה א׳ לא מתחילה בראש</h2>
+            <p class="section-subtitle" style="margin: 0.8rem auto 0;">הטעות הנפוצה ביותר שהורים עושים — וה&shy;אמת שמשנה את כל התמונה</p>
+        </div>
+
+        <div class="myth-wrapper">
+            <div class="myth-box wrong fade-up">
+                <div class="myth-tag">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    מה שרוב ההורים חושבים
+                </div>
+                <h3>״צריך להתחיל לתרגל אותיות, מספרים ואחיזת עיפרון״</h3>
+                <p>הרבה הורים משקיעים בחוברות עבודה, לימוד קריאה מוקדם ותרגול כתיבה. אבל בלי הבסיס הנכון, כל ההשקעה הזו עלולה ליצור תסכול — גם אצל הילד וגם אצלכם.</p>
+            </div>
+
+            <div class="myth-box right fade-up">
+                <div class="myth-tag">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    מה שבאמת עובד
+                </div>
+                <h3>הכנה אמיתית מתחילה בגוף</h3>
+                <p>ילד שהגוף שלו לא מווסת, לא יצליח להתרכז — <span class="highlight-text">לא משנה כמה הוא נבון.</span> כשאנחנו מחזקים את המערכת התנועתית והחושית של הילד, אנחנו בונים לו את <span class="highlight-text">״תשתיות הלמידה״</span> — הבסיס שעליו הכל נבנה.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== METHOD ==================== -->
+<section class="method-section">
+    <div class="container">
+        <div class="method-intro fade-up">
+            <span class="section-label">השיטה שלנו</span>
+            <h2 class="section-title">סדנה ייחודית. 12 מפגשים. שינוי אמיתי.</h2>
+            <p class="section-subtitle">בניגוד לחוגים אחרים בני 45 דקות, אנחנו מקדישים שעה שלמה לכל מפגש — כדי לאפשר תהליך עמוק של מתח והרפיה. הילדים נכנסים למרחב בטוח ועובדים דרך חוויה וכלים פיזיים.</p>
+        </div>
+
+        <div class="method-cards">
+            <div class="method-card fade-up">
+                <div class="method-icon-wrap">🌀</div>
+                <h3>שיווי משקל וויסות חושי</h3>
+                <p>צלחת וסטיבולרית וטרמפולינה לפיתוח שיווי משקל, מיקוד ויכולת ויסות חושי — היכולת לשבת, להתרכז ולהקשיב.</p>
+            </div>
+
+            <div class="method-card fade-up">
+                <div class="method-icon-wrap">🧠</div>
+                <h3>סנכרון ימין-שמאל במוח</h3>
+                <p>תרגילי חציית קו אמצע (עקב בצד אגודל) לסנכרון בין האונה הימנית לשמאלית — הבסיס ההכרחי לקריאה וכתיבה.</p>
+            </div>
+
+            <div class="method-card fade-up">
+                <div class="method-icon-wrap">🧘</div>
+                <h3>מתח והרפיה — שליטה עצמית</h3>
+                <p>תרגילי מתח והרפיה מלמדים את הילד שליטה עצמית — כלים להתמודדות עם תסכולים ולחצים בזמן אמת.</p>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:2.5rem;" class="fade-up">
+            <a href="syllabus.html" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--primary);font-weight:700;font-size:1.1rem;text-decoration:none;border:2px solid var(--primary);padding:0.8rem 2rem;border-radius:50px;transition:all 0.3s ease;" onmouseover="this.style.background='var(--primary)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--primary)'">
+                צפו בסילבוס המלא — 12 מפגשים
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DETAILS STRIP ==================== -->
+<section class="details-strip">
+    <div class="details-grid">
+        <div class="detail-item fade-up">
+            <div class="detail-number">12</div>
+            <div class="detail-label">מפגשים</div>
+        </div>
+        <div class="detail-item fade-up">
+            <div class="detail-number">60</div>
+            <div class="detail-label">דקות לכל מפגש</div>
+        </div>
+        <div class="detail-item fade-up">
+            <div class="detail-number">5-6</div>
+            <div class="detail-label">גילאים</div>
+        </div>
+        <div class="detail-item fade-up">
+            <div class="detail-number">100%</div>
+            <div class="detail-label">מבוסס חוויה</div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== RESULTS ==================== -->
+<section class="results-section">
+    <div class="container">
+        <div class="fade-up">
+            <span class="section-label">התוצאה</span>
+            <h2 class="section-title">גוף חזק → ביטחון עצמי → מוכנות אמיתית</h2>
+            <p class="section-subtitle">התוצאה היא תגובת שרשרת: ילד שמכיר את הגוף שלו ויודע להרגיע את עצמו, מגיע לבית הספר עם תחושת מסוגלות אמיתית.</p>
+        </div>
+
+        <div class="results-content">
+            <ul class="result-list fade-up">
+                <li>
+                    <div class="result-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                    <span>גוף חזק ומווסת שיודע לשבת, להקשיב ולהתרכז</span>
+                </li>
+                <li>
+                    <div class="result-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                    <span>ביטחון עצמי ותחושת מסוגלות אמיתית</span>
+                </li>
+                <li>
+                    <div class="result-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                    <span>כלים להתמודדות עם תסכולים ולחצים בזמן אמת</span>
+                </li>
+                <li>
+                    <div class="result-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                    <span>מוח מסונכרן ומוכן לקריאה, כתיבה ולמידה</span>
+                </li>
+                <li>
+                    <div class="result-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+                    <span>אמונה פנימית — ״אני יכול להצליח ולהתמודד עם קשיים״</span>
+                </li>
+            </ul>
+
+            <div class="bonus-card fade-up">
+                <div class="bonus-badge">בונוס חברתי</div>
+                <h3>פרצופים מוכרים ב-1 בספטמבר</h3>
+                <p>הסדנה ממוקדת לפי אזורי רישום ובתי ספר, כך שהילד שלכם יפגוש ביום הראשון פרצופים מוכרים — עוגן חברתי ענק שמוריד דרמטית את מפלס הלחץ ויוצר תחושת שייכות מהרגע הראשון.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section" id="cta">
+    <div class="container">
+        <h2 class="fade-up">תנו לילד שלכם את ההתחלה הנכונה</h2>
+        <p class="fade-up">המקומות מוגבלים. הסדנה ממוקדת לפי אזורי רישום כדי להבטיח שהילדים יכירו אחד את השני לפני יום הראשון בבית הספר.</p>
+        <a href="https://wa.me/97254646479363?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%D7%9E%D7%94%D7%92%D7%95%D7%A3%20%D7%9C%D7%9E%D7%95%D7%97" target="_blank" class="cta-btn fade-up">
+            רוצה לשמוע פרטים ולהירשם
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <p class="cta-trust fade-up">ללא התחייבות &bull; שאלות? דברו איתנו</p>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <p>כל הזכויות שמורות &copy; 2026 | מהגוף למוח — מוכנים לכיתה א׳</p>
+</footer>
+
+<!-- ===== SCROLL ANIMATIONS ===== -->
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
